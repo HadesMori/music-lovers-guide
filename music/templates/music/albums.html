@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Albums
+{% endblock title %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "music/albums.css"%}">
+{% endblock css_files %}
+
+{% block content %}
+    <header>
+        <img src="{% static "images/album.png"%}" alt="icon" width="40px" height="40px" class="icon">
+        <h1>Albums</h1>
+    </header>
+    
+    {% include "navigation.html" %}
+    
+    <section>
+        <h2>All albums</h2>
+        <ul>
+            {% for album in albums %}  
+                <li>
+                    <div class="song-details">
+                        <strong><a href="{% url "album-page" album.slug %}">{{album.title}}</a></strong> 
+                        <a href="{% url "band-page" album.band.slug %}">{{album.band}}</a>
+                    </div>
+                    <div class="album">
+                        {% if album.songs.count == 1 %}
+                            {{album.songs.count}} track 
+                        {% else %}
+                            {{album.songs.count}} tracks
+                        {% endif %}
+                    </div>
+                </li>
+            {%endfor%}
+        </ul>
+    </section>    
+{% endblock content %}

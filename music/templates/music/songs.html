@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Songs
+{% endblock title %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "music/songs.css"%}">
+{% endblock css_files %}
+
+{% block content %}
+    <header>
+        <img src="{% static "images/song.png"%}" alt="icon" width="40px" height="40px" class="icon">
+        <h1>Songs</h1>
+    </header>
+    
+    {% include "navigation.html" %}
+    
+    <section>
+        <h2>All songs</h2>
+        <ul>
+            {% for song in songs %}  
+                <li>
+                    <div class="song-details">
+                        <strong><a href="{% url "song-page" song.slug %}">{{song.title}}</a></strong> 
+                        <a href="{% url "band-page" song.band.slug %}">{{song.band}}</a>
+                    </div>
+                    <div class="album"><a href="{% url "album-page" song.album.slug %}">{{song.album}}</a></div>
+                </li>
+            {%endfor%}
+        </ul>
+    </section>    
+{% endblock content %}

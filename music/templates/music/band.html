@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {{band.name}}
+{% endblock title %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "music/band.css"%}">
+{% endblock css_files %}
+
+{% block content %}
+    <header>
+        <h1>{{ band.name }}</h1>
+    </header>
+
+    {% include "navigation.html" %}
+
+    <section>
+        <h2>Songs</h2>
+        <ul>
+            {% for song in songs %}
+                <li>
+                    <div class="song-details">
+                        <strong><a href="{% url "song-page" song.slug %}">{{song.title}}</a></strong> 
+                        <a href="{% url "band-page" song.band.slug %}">{{song.band}}</a>
+                    </div>
+                    <div class="album"><a href="{% url "album-page" song.album.slug %}">{{song.album}}</a></div>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h2>Albums</h2>
+        <ul>
+            {% for album in albums %}
+                <li>
+                    <div class="song-details">
+                        <strong><a href="{% url "album-page" album.slug %}">{{album.title}}</a></strong>
+                        <a href="{% url "band-page" album.band.slug %}">{{album.band}}</a>
+                    </div>
+                    <div class="album">
+                        {% if album.songs.count == 1 %}
+                            {{album.songs.count}} track 
+                        {% else %}
+                            {{album.songs.count}} tracks
+                        {% endif %}
+                        
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock content %}

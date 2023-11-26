@@ -1,0 +1,11 @@
+.album a,
+.song-details a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Додаткові стилі для розділової лінії між секціями */
+section + section {
+    border-top: 2px solid white; /* Горизонтальна розділова лінія */
+    margin-top: 40px; /* Відступ між секціями */
+}

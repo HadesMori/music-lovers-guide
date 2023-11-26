@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Artists
+{% endblock title %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "music/all-artists.css"%}">
+{% endblock css_files %}
+
+{% block content %}
+    <header>
+        <img src="{% static "images/artist.png"%}" alt="icon" width="40px" height="40px" class="icon">
+        <h1>Artists</h1>
+    </header>
+    
+    {% include "navigation.html" %}
+    
+    <section>
+        <h2>All artists</h2>
+        <ul>
+            {% for artist in artists %}
+                <li>
+                    <div class="song-details">
+                        <strong>{{artist.name}}</strong> 
+                    </div>
+                    <div class="album"><a href="{% url "band-page" artist.band.slug %}">{{artist.band}}</a></div>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>    
+{% endblock content %}
